@@ -1,2 +1,2 @@
-# Unusual Insider Event Detection Framework on Enterprise Resource Planning Systems using Adversarial Recurrent Auto-encoder
+# UIBD Framework on Enterprise Resource Planning Systems using ARAE
 enterprise threat detection
