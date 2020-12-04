@@ -7,6 +7,7 @@ from sklearn.metrics import roc_curve, auc
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import label_binarize
 from sklearn.multiclass import OneVsRestClassifier
+import pdb
 from scipy import interp
 from sklearn.metrics import roc_auc_score
 
@@ -37,8 +38,15 @@ y_score = classifier.fit(X_train, y_train).decision_function(X_test)
 fpr = dict()
 tpr = dict()
 roc_auc = dict()
+
+
 for i in range(n_classes):
-    fpr[i], tpr[i], _ = roc_curve(y_test[:, i], y_score[:, i])
+    pdb.set_trace()
+    _score = y_test[:, i]
+    _annot = y_score[:, i]
+    print(np.shape(_score))
+    print(np.shape(_annot))
+    fpr[i], tpr[i], _ = roc_curve(_score, _annot)
     roc_auc[i] = auc(fpr[i], tpr[i])
 
 # Compute micro-average ROC curve and ROC area

@@ -1,8 +1,10 @@
 import os
 import math
+from sklearn.utils import shuffle
 import argparse
 import random
 import torch
+import matplotlib.pyplot as plt
 from torch import optim
 from torch.nn.utils import clip_grad_norm_
 from torch.utils.data import DataLoader
@@ -13,23 +15,28 @@ from utils.utils import load_dataset
 from utils.gen_armiq_dataset import load_armiq_dataset, length_norm, gen_artificial_anomaly_from_historgram
 from utils.armiq_data_loader import ARMIQ_TRAIN_DATALOADER, ARMIQ_EVAL_DATALOADER
 from tensorboardX import SummaryWriter
+from MulticoreTSNE import MulticoreTSNE as TSNE
 import dataset_analysis as da
 import numpy as np
+from sklearn.metrics import roc_curve, auc
+from tqdm.notebook import tqdm
+
 import pandas as pd
 import csv
 
 import pdb
-
+_tv_ratio = 0.9 #Train versus validation ratio
 BATCH_SIZE = 32
 _lambda = 0.01
 _global_step = 0
+check_interval = 100
 
-summary = SummaryWriter('./logs')
+summary = SummaryWriter('./logs/latent_adv')
+
 
 def parse_arguments():
     p = argparse.ArgumentParser(description='Hyperparams')
-    p.add_argument('-epochs', type=int, default=200,
-                   help='number of epochs for train')
+    p.add_argument('-epochs', type=int, default=30,help='number of epochs for train')
     p.add_argument('-batch_size', type=int, default=32,
                    help='number of epochs for train')
     p.add_argument('-lr', type=float, default=0.0001,
@@ -42,6 +49,7 @@ def sample_wise_reconstruction_error(output,annot,mask):
     _shape = np.shape(mask)
     mask = mask.flatten().float()
     error = (output-annot)**2
+    pdb.set_trace()
     error = torch.mul(mask.view(-1,1),error.view(_shape[0]*_shape[1],-1))
     error = error.view(_shape[0],_shape[1],-1)
     return error.sum(1).sum(1)
@@ -53,8 +61,50 @@ def loss_masked(output,annot,mask,type='train'):
     dif = dif.view([_shape[0]*_shape[1],_shape[2]])
     return torch.sum(torch.matmul(mask,((dif) ** 2)))
 
+
+def validation(model, val_loader, epoch):
+    model = model.cpu()
+    total_loss = 0
+    _tmp_loss = 0.0
+    _len = len(val_loader)
+    for b, batch in enumerate(val_loader):
+        print("%d/%d"%(b,len(val_loader)))
+        src = batch['event'].long()
+        msk = batch['mask'].float()
+        msk = msk.cpu()
+        src = src.cpu()
+
+        output, trg, latent = model(src)
+        loss = loss_masked(output, trg, msk)
+        msk = msk.cpu()
+        latent = latent.cpu()
+        src = src.cpu()
+        _shape = np.shape(latent)
+        src_fatten = src.view([-1])
+        msk_flatten = msk.view([-1])
+        latent = latent.view([_shape[0] * _shape[1], _shape[2]])
+        latent = latent[msk_flatten == 1, :]
+
+        src_flatten = src_fatten[msk_flatten == 1]
+
+        total_loss += loss.data.item()
+        if b==0:
+            _latent_list = latent.detach().numpy()
+            _event_code_list = src_flatten.detach().numpy()
+        else:
+            _latent_list = np.concatenate((_latent_list,latent.detach().numpy()),axis=0)
+            _event_code_list = np.concatenate((_event_code_list,src_flatten.detach().numpy()),axis=0)
+    print('[Validation][%d epoch %d step] - Total loss: %.3f ' % (epoch, b, total_loss / _len))
+    #pdb.set_trace()
+    tsne_model = TSNE(learning_rate=100,n_jobs=6)
+    print('Dim reduction - T-SNE - ing')
+    tf_latent = tsne_model.fit_transform(_latent_list)
+    plt.scatter(tf_latent[:,0], tf_latent[:,1], c='m',s=0.5)
+    plt.savefig('./plot_dist/%d-epoch_arae_latent_distribution.pdf'%(epoch))
+    return total_loss / _len
+
 #Evaluation
-def evaluate(model,discriminator,data_loader):
+def evaluate(model,data_loader,epoch):
     for b, batch in enumerate(data_loader):
         src = batch['event'].long().cuda()
         msk = batch['mask'].float().cuda()
@@ -64,7 +114,6 @@ def evaluate(model,discriminator,data_loader):
         msk_flatten=msk.view([-1])
         latent = latent.view([_shape[0]*_shape[1],_shape[2]])
         latent= latent[msk_flatten==1,:]
-        measure = discriminator(latent)
         recon_error = torch.log10(sample_wise_reconstruction_error(output,trg,msk))
         if b ==0:
             event_list = src.data.cpu()
@@ -74,12 +123,32 @@ def evaluate(model,discriminator,data_loader):
             event_list = np.concatenate((event_list,src.data.cpu()))
             recon_error_list = np.concatenate((recon_error_list,recon_error.data.cpu()))
             annot_list = np.concatenate((annot_list,annot.data.cpu()))
+
+
+    fpr, tpr, _ = roc_curve(recon_error_list, annot_list)
+    roc_auc = auc(fpr, tpr)
+    plt.figure()
+    lw = 2
+    plt.plot(fpr, tpr, color='darkorange', lw=lw, label='ROC curve (area = %0.2f)' % roc_auc)
+    plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver operating characteristic example')
+    plt.legend(loc="lower right")
+    plt.show()
     return event_list,recon_error_list,annot_list
 
 
 def train(model,discriminator, optimizer,optimizer_D, train_loader, grad_clip,epoch):
+    model = model.cuda()
     model.train()
     total_loss = 0
+    _tmp_loss = 0.0
+    _tmp_re_loss = 0.0
+
+    _tmp_adv_loss = 0.0
     for b, batch in enumerate(train_loader):
         _global_step
         src = batch['event'].long()
@@ -135,10 +204,20 @@ def train(model,discriminator, optimizer,optimizer_D, train_loader, grad_clip,ep
         step_g_loss =g_loss.data.item()
         step_d_loss =d_loss.data.item()
 
+        _tmp_loss += step_loss
+        _tmp_re_loss += step_g_loss
+        _tmp_adv_loss += step_d_loss
+
+
         total_loss += loss.data.item()
         summary.add_scalar('loss/loss',step_loss,epoch * len(train_loader) + b)
         summary.add_scalar('loss/loss_d',step_d_loss,epoch * len(train_loader) + b)
         summary.add_scalar('loss/loss_g',step_g_loss,epoch * len(train_loader) + b)
+        if b%check_interval==0:
+            print('[training][%d epoch %d step] - Total loss: %.3f (Re loss: %.3f | Adv loss: %.3f | balancing weight (Lambda) : %f)'%(epoch,b,_tmp_loss/check_interval,_tmp_re_loss/check_interval,_tmp_adv_loss/check_interval,_lambda))
+            _tmp_loss = 0.0
+            _tmp_re_loss = 0.0
+            _tmp_adv_loss = 0.0
     return total_loss
 
 def main():
@@ -152,10 +231,24 @@ def main():
     print("[!] preparing dataset...")
 
     #Load dataset
+    #pdb.set_trace()
     train_set,length_list,min_length,max_length = load_armiq_dataset()
     _train_set_histogram = da.event_histogram(150,train_set)
     abnormal_set,ab_length_list =gen_artificial_anomaly_from_historgram(_train_set_histogram,int(len(train_set)*0.3),min_length,max_length)
-    train_set,dynamics_mask = length_norm(train_set,length_list,max_length)
+
+    tmp_set,tmp_mask = length_norm(train_set,length_list,max_length)
+
+    _train_lenth = len(train_set)
+    #Shuffle
+    tmp_set, tmp_mask = shuffle(tmp_set,tmp_mask)
+    train_set = tmp_set[0:int(_train_lenth*_tv_ratio)]
+    dynamics_mask = tmp_mask[0:int(_train_lenth*_tv_ratio)]
+
+    val_set = tmp_set[int(_train_lenth*_tv_ratio):]
+    val_mask = tmp_mask[int(_train_lenth*_tv_ratio):]
+
+
+
     ab_event_set,ab_dynamic_mask = length_norm(abnormal_set,ab_length_list,max_length)
 
     #print("[TRAIN]:%d samples (shortest log: %d\tlongest log: %d)"% (len(train_set),min_length,max_length))
@@ -166,8 +259,13 @@ def main():
     #       % (len(train_iter), len(train_iter.dataset),
     #          len(test_iter), len(test_iter.dataset)))
 
+    validation_loader = ARMIQ_TRAIN_DATALOADER(val_set,val_mask)
     armiq_trainloader= ARMIQ_TRAIN_DATALOADER(train_set,dynamics_mask)
+
+
     trainloader = DataLoader(armiq_trainloader,shuffle=True,batch_size=32,num_workers=4)
+    valloader = DataLoader(validation_loader, shuffle=False, batch_size=32, num_workers=4)
+
 
     #combine part of the normal set and the abnormal set.
     rand_index_for_normal = random.sample(range(3,len(train_set)),int(len(train_set)*0.6))
@@ -177,9 +275,7 @@ def main():
 
 
     armiq_testloader = ARMIQ_EVAL_DATALOADER(eval_set,eval_annotation,eval_mask)
-
     evalloader = DataLoader(armiq_testloader,shuffle=True,batch_size=20,num_workers=1)
-
 
 
 
@@ -194,38 +290,42 @@ def main():
 
 
     for e in range(1, args.epochs+1):
-        if e > 50:
-            optimizer = optim.Adam(rvae.parameters(), lr=0.001,weight_decay=0.01)
-            optimizer_D = optim.Adam(discriminator.parameters(), lr=0.001,weight_decay=0.01)
-        if e > 80:
-            optimizer = optim.Adam(rvae.parameters(), lr=0.0001,weight_decay=0.01)
-            optimizer_D = optim.Adam(discriminator.parameters(), lr=0.0001,weight_decay=0.01)
-        if e > 120:
-            optimizer = optim.Adam(rvae.parameters(), lr=0.00001,weight_decay=0.01)
-            optimizer_D = optim.Adam(discriminator.parameters(), lr=0.00001,weight_decay=0.01)
-        tloss = train(rvae,discriminator, optimizer,optimizer_D, trainloader, args.grad_clip,e)
+        if e > 10:
+            optimizer = optim.Adam(rvae.parameters(), lr=0.001,weight_decay=0.001)
+            optimizer_D = optim.Adam(discriminator.parameters(), lr=0.001,weight_decay=0.001)
+        if e > 15:
+            optimizer = optim.Adam(rvae.parameters(), lr=0.0001,weight_decay=0.0001)
+            optimizer_D = optim.Adam(discriminator.parameters(), lr=0.0001,weight_decay=0.0001)
+        if e > 20:
+            optimizer = optim.Adam(rvae.parameters(), lr=0.00001,weight_decay=0.00001)
+            optimizer_D = optim.Adam(discriminator.parameters(), lr=0.00001,weight_decay=0.00001)
 
-        summary.add_scalar('loss/total_loss',tloss,e)
+        #val_tloss = validation(rvae, valloader, e)
 
-        print("[ %d-epoch  ][loss: %10.10f]" %(e,tloss))
+        train_tloss = train(rvae, discriminator, optimizer, optimizer_D, trainloader, args.grad_clip, e)
+
+        summary.add_scalar('loss/train_total_loss',train_tloss,e)
+        #summary.add_scalar('loss/validation_total_loss',val_tloss,e)
+
+        #print("[ %d-epoch  ][train loss: %.5f validation loss: %.5f" %(e,train_tloss,val_tloss))
         #val_loss = evaluate(rvae, val_iter, en_size, DE, EN)
         #print("[Epoch:%d] val_loss:%5.3f | val_pp:%5.2fS" % (e, val_loss, math.exp(val_loss)))
 
         # Save the model if the validation loss is the best we've seen so far.
         if e%10==0:
             print("[!] saving model...")
-            if not os.path.isdir(".save"):
-                os.makedirs(".save")
-            torch.save(rvae.state_dict(), './.save/rvae_%d.pt' % (e))
+            if not os.path.isdir("./save"):
+                os.makedirs("./save")
+            torch.save(rvae.state_dict(), './save/rvae_%d.pt' % (e))
             print("[!] testing model...")
-            _ev_list,_recon_list,_annot_list = evaluate(rvae,discriminator,evalloader)
-            _file_name_csv = './eval/armiq_eval_result_%d_epoch.csv'%(e)
-            with open(_file_name_csv,'w',encoding='utf-8') as _csvf:
-                wr = csv.writer(_csvf)
-                for _x in range(len(_ev_list)):
-                    _tmp = _ev_list[_x]
-                    wr.writerow([_tmp[_tmp!=0],_recon_list[_x],_annot_list[_x]])
-            _csvf.close()
+            _ev_list,_recon_list,_annot_list = evaluate(rvae,evalloader)
+            # _file_name_csv = './eval/armiq_eval_result_%d_epoch.csv'%(e)
+            # with open(_file_name_csv,'w',encoding='utf-8') as _csvf:
+            #     wr = csv.writer(_csvf)
+            #     for _x in range(len(_ev_list)):
+            #         _tmp = _ev_list[_x]
+            #         wr.writerow([_tmp[_tmp!=0],_recon_list[_x],_annot_list[_x]])
+            # _csvf.close()
 
 if __name__ == "__main__":
     try:

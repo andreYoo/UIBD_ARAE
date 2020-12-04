@@ -9,34 +9,59 @@ import numpy as np
 import pdb
 
 class Encoder(nn.Module):
-    def __init__(self, input_size, embed_size, hidden_size,
-                 n_layers=1, dropout=0.5):
+    def __init__(self, input_size, embed_size, hidden_size,n_layers=1, dropout=0.5,cell_type='GRU',input_type='dense'):
         super(Encoder, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
         self.embed_size = embed_size
-        self.embed = nn.Embedding(input_size, embed_size)
-        self.gru = nn.GRU(embed_size, hidden_size, n_layers,dropout=dropout, bidirectional=True)
+        self.input_type = input_type
+        self.cell_type = cell_type
 
-    def forward(self, src, hidden=None):
-        embedded = self.embed(src)
-        outputs, hidden = self.gru(embedded, hidden)
+        if self.input_type=='dense':
+            self.embed = nn.Embedding(input_size, embed_size)
+
+
+        if self.cell_type=='GRU':
+            self.gru = nn.GRU(embed_size, hidden_size, n_layers,dropout=dropout, bidirectional=True)
+        if self.cell_type=='LSTM':
+            self.gru = nn.LSTM(embed_size, hidden_size, n_layers,dropout=dropout, bidirectional=True)
+        if self.cell_type=='RNN':
+            self.gru = nn.RNN(embed_size, hidden_size, n_layers,dropout=dropout, bidirectional=True)
+
+
+    def forward(self, src,hidden=None,state=None):
+        if self.input_type=='dense':
+            embedded = self.embed(src)
+        if self.input_type=='onehot':
+            embedded = src
+        if self.cell_type=="RNN" or self.cell_type=="GRU":
+            outputs, hidden = self.gru(embedded, hidden)
+        if self.cell_type=='LSTM':
+            outputs, hidden = self.gru(embedded, hidden)
         # sum bidirectional outputs
         outputs = (outputs[:, :, :self.hidden_size] + outputs[:, :, self.hidden_size:])
-        return outputs, hidden,embedded
+        return outputs,hidden,embedded
 
 
 
 class Decoder(nn.Module):
-    def __init__(self, input_size, hidden_size,n_layers=1, dropout=0.5):
+    def __init__(self, input_size, hidden_size,n_layers=1, dropout=0.5,cell_type='GRU'):
         super(Decoder, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
-        self.gru = nn.GRU(input_size, hidden_size, n_layers,dropout=dropout, bidirectional=True)
+        self.cell_type = cell_type
+        if self.cell_type=='GRU':
+            self.gru = nn.GRU(input_size, hidden_size, n_layers,dropout=dropout, bidirectional=True)
+        if self.cell_type=='LSTM':
+            self.gru = nn.LSTM(input_size, hidden_size, n_layers,dropout=dropout, bidirectional=True)
+        if self.cell_type=='RNN':
+            self.gru = nn.RNN(input_size, hidden_size, n_layers,dropout=dropout, bidirectional=True)
 
-    def forward(self, src, hidden=None):
-        outputs, hidden = self.gru(src, hidden)
-        # sum bidirectional outputs
+    def forward(self, src, hidden=None,state=None):
+        if self.cell_type=="RNN" or self.cell_type=="GRU":
+            outputs, hidden = self.gru(src, hidden)
+        if self.cell_type=='LSTM':
+            outputs, hidden = self.gru(src, hidden)
         outputs = (outputs[:, :, :self.hidden_size] + outputs[:, :, self.hidden_size:])
         return outputs, hidden
 
@@ -65,9 +90,9 @@ class RVAE(nn.Module):
         return eps.mul(std).add_(mu)  # return z sample
 
     def forward(self, src):
-        encoder_output, hidden_enc,embedded = self.encoder(src)
+        encoder_output,hidden_enc,embedded = self.encoder(src)
         output, hidden_dec = self.decoder(encoder_output)
         #output, hidden = self.decoder(encoder_output, hidden)
-        return output,embedded, encoder_output
+        return output,embedded, encoder_output #latent feature is 'encoder_output'
 
 

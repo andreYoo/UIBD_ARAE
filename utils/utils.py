@@ -1,7 +1,16 @@
 import re
 import spacy
+import numpy as np
 from torchtext.data import Field, BucketIterator
 from torchtext.datasets import Multi30k
+import torch.nn.functional as F
+import pdb
+def one_hot_vetorisation(seq_batch,one_hot_dim):
+    _shape = np.shape(seq_batch)
+    _one_hot = np.zeros([_shape[0],_shape[1],one_hot_dim])
+    for _idx,_tmp in enumerate(seq_batch):
+        _one_hot[_idx] = F.one_hot(_tmp,num_classes=one_hot_dim)
+    return _one_hot
 
 
 def load_dataset(batch_size):

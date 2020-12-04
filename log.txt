@@ -1,0 +1,1000 @@
+  384  cd ./Workspace/
+  385  ls
+  386  sudo apt update
+  387  sudo apt upgrade
+  388  df -al
+  389  ls
+  390  cd /media/einstein/
+  391  ls
+  392  cd /W
+  393  ls
+  394  cd ./Warehouse/
+  395  ls
+  396  cd ,..
+  397  cd ..
+  398  ls
+  399  cd./W
+  400  cd ./Warehouse/
+  401  ls
+  402  cd ~/Workspace/armiq/
+  403  ls
+  404  cd Armiq/
+  405  ls
+  406  jupyter notebook
+  407  cd ./Workspace/
+  408  ls
+  409  cd python_lecture/
+  410  ls
+  411  jupyter notebook
+  412  source activate py36
+  413  jupyter python
+  414  jupyter notebook
+  415  history > log.txt
+  416  vim log.txt 
+  417  sudo nvidia-smi deamon gpustat -i
+  418  vim log.txt 
+  419  nvidia-smi -l 1
+  420  cd ./Workspace/
+  421  ls
+  422  cd ..
+  423  ls
+  424  cd ./Workspace/
+  425  ls
+  426  mkdir python_lecture
+  427  cd pyt
+  428  ls
+  429  clear
+  430  ls
+  431  cd ./python_lecture/
+  432  ls
+  433  git clone https://github.com/sh2orc/datascience.git
+  434  ls
+  435  cd datascience/
+  436  ls
+  437  source activate py36
+  438  pip install seaborn
+  439  pip install bs4
+  440  sudo reboot
+  441  htop
+  442  ps
+  443  netstat -i
+  444  netstat -ltu
+  445  ps
+  446  sudo ps
+  447  htop
+  448  sudo apt update
+  449  sudo apt upgrade
+  450  sudo reboot
+  451  ls
+  452  sudo apt update
+  453  sudo apt upgrade
+  454  sudo apt update
+  455  sudo apt upgrade
+  456  sudo pkill teamviewer
+  457  teamviewer 
+  458  sudo reboot
+  459  sudo apt update
+  460  sudo apt upgrade
+  461  sudo reboot
+  462  sudo apt install gnome-tweaks
+  463  ls
+  464  cd ./Workspace/
+  465  ls
+  466  git clone https://github.com/zfjsail/gae-pytorch.git
+  467  source activate py36
+  468  cd gae-pytorch/
+  469  ls
+  470  cd gae/
+  471  ls
+  472  cd ..
+  473  ls
+  474  vim requirements.txt 
+  475  pip install -r ./requirements.txt 
+  476  cd gae/
+  477  ls
+  478  python train.py 
+  479  scd ..
+  480  ls
+  481  cd ..
+  482  ls
+  483  vim gae/train.py 
+  484  python gae/train.py 
+  485  ls
+  486  cd gae/
+  487  ls
+  488  vim model.py 
+  489  vim train.py 
+  490  python train.py 
+  491  vim model.py 
+  492  vim optimizer.py 
+  493  vim model.py 
+  494  python train.py 
+  495  pip install sklearn
+  496  python train.py 
+  497  vim train.py 
+  498  python train.py 
+  499  ls
+  500  cd ..
+  501  git clone https://github.com/DaehanKim/vgae_pytorch.git
+  502  cd vgae_pytorch/
+  503  ls
+  504  python train.py 
+  505  ls
+  506  cd ..
+  507  ls
+  508  mkdir basic_gnn
+  509  cd basic_gnn/
+  510  vim main.py
+  511  ls
+  512  cd ./Workspace/
+  513  ls
+  514  source activate py36
+  515  ll
+  516  mkdir stock_data
+  517  cd stock_
+  518  ls
+  519  cd stock_data/
+  520  ls
+  521  clear
+  522  ls
+  523  pip install datapackage
+  524  vim test.py
+  525  python test.py 
+  526  vim test.py
+  527  python test.py 
+  528  vim test.py
+  529  python test.py 
+  530  vim test.py
+  531  python test.py 
+  532  vim test.py
+  533  python test.py 
+  534  vim test.py
+  535  python test.py 
+  536  ps
+  537  pkill -9 1087214
+  538  ls
+  539  ps
+  540  pkill -9 python
+  541  ls
+  542  pip install pywt
+  543  pip install PyWavelets
+  544  vim test.py 
+  545  python test.py 
+  546  vim test.py 
+  547  python test.py 
+  548  vim test.py 
+  549  python test.py 
+  550  vim test.py 
+  551  python test.py 
+  552  vim test.py 
+  553  python test.py 
+  554  pip install scaleogram
+  555  python test.py 
+  556  pip install scaleogram
+  557  python test.py 
+  558  vim test.py 
+  559  sudo apt update
+  560  sudo apt upgrade
+  561  ls
+  562  cd ./w
+  563  cd ./Workspace/
+  564  ls
+  565  mkdir GCN
+  566  cd GCN/
+  567  ls
+  568  git clone https://github.com/tkipf/pygcn.git
+  569  ls
+  570  cd pygcn/
+  571  ls
+  572  source activate py36
+  573  python setup.py install
+  574  ls
+  575  cd pygcn
+  576  ls
+  577  python train.py 
+  578  ls
+  579  cd ./Workspace/
+  580  ls
+  581  git clone https://github.com/andreYoo/KOSPI_Data_Collector.git
+  582  sudo shutdown
+  583  sudo shutdown now
+  584  ls
+  585  cd ./w
+  586  ls
+  587  cd ./Workspace/
+  588  ls
+  589  git KOSPI_Data_Collector/
+  590  ls
+  591  cd KOSPI_Data_Collector/
+  592  ls
+  593  git pull
+  594  ls
+  595  exit
+  596  ls
+  597  cd ./Workspace/
+  598  ls
+  599  cd ./KOSPI_Data_Collector/
+  600  ls
+  601  clear
+  602  ls
+  603  source activate py36
+  604  python tmp2_other.py 
+  605  pip install tqdm
+  606  python tmp2_other.py 
+  607  pip install lxml
+  608  python tmp2_other.py 
+  609  ls
+  610  clear
+  611  ls
+  612  cd ./Workspace/
+  613  ls
+  614  cd KOSPI_Data_Collector/
+  615  ls
+  616  clear
+  617  ls
+  618  vim models/
+  619  cd models/
+  620  ls
+  621  vim predictor.py 
+  622  ls
+  623  cd ..
+  624  ls
+  625  vim prediction.py 
+  626  ls
+  627  clear
+  628  ls
+  629  vim utils/
+  630  cd utils/
+  631  ls
+  632  vim dataloader.py 
+  633  ls
+  634  cd ..
+  635  vim create_dataset.py 
+  636  clear
+  637  ls
+  638  l
+  639  ls
+  640  python create_dataset.py 
+  641  vim create_dataset.py 
+  642  python create_dataset.py 
+  643  vim create_dataset.py 
+  644  clear
+  645  python create_dataset.py 
+  646  vim create_dataset.py 
+  647  python create_dataset.py 
+  648  ls
+  649  vim utils/dataloader.py 
+  650  ls
+  651  source activate py36
+  652  python ./utils/dataloader.py 
+  653  vim prediction.py 
+  654  ls
+  655  cd ..
+  656  ;ls
+  657  ls
+  658  clear
+  659  ls
+  660  cd ./Workspace/
+  661  ls
+  662  cd ./KOSPI_Data_Collector/
+  663  ls
+  664  vim utils/dataloader.py 
+  665  clear
+  666  vim utils/dataloader.py 
+  667  exit
+  668  clear
+  669  ls
+  670  clear
+  671  ls
+  672  c
+  673  cd ./Workspace/
+  674  l
+  675  ls
+  676  vim KOSPI_Data_Collector/
+  677  cd ./KOSPI_Data_Collector/
+  678  ls
+  679  clear
+  680  ls
+  681  vim prediction.py 
+  682  x
+  683  clear
+  684  ls
+  685  vim ~/.vimrc 
+  686  vim prediction.py 
+  687  vim ~/.vimrc 
+  688  vim prediction.py 
+  689  exit
+  690  ls
+  691  cd ./Workspace/KOSPI_Data_Collector/
+  692  ls
+  693  rm *.h5
+  694  git add all
+  695  git add ./*
+  696  git commit -m 'update on workshop'
+  697  git commit -m 'upcate
+  698  git commit -m 'update'
+  699  git config --global user.email "jm.andrew.yu@gmail.com"
+  700  git config --global user.name "Andrew Yu"
+  701  git commit -m 'update'
+  702  git push
+  703  ls
+  704  exit
+  705  source activate py36
+  706  pip install tensorflow-gpu
+  707  conda remove tensorflow-gpu tensorflow tensorflow-base
+  708  conda install tensorflow
+  709  conda remove tensorflow
+  710  conda install tensorflow-gpu
+  711  python
+  712  ls
+  713  cd ./Workspace/
+  714  ls
+  715  cd GCN/
+  716  ls
+  717  cd pygcn/
+  718  ls
+  719  cd pygcn
+  720  ls
+  721  python train.py 
+  722  pip install scipy
+  723  python train.py 
+  724  ls
+  725  cd ..
+  726  ls
+  727  cd ..
+  728  ls
+  729  cd ..
+  730  ls
+  731  cd gae-pytorch/
+  732  ls
+  733  cd gae/
+  734  ls
+  735  python train.py 
+  736  conda install tensorflow
+  737  ls
+  738  python
+  739  clear
+  740  pip show tensorflow
+  741  pip show tensorflow-gpu
+  742  conda remove tensorflow
+  743  pip install tensorflow
+  744  pip uninstall tf-nightly
+  745  pip install tensorflow-gpu --upgrade --force-reinstall 
+  746  sudo pip install tensorflow-gpu --upgrade --force-reinstall 
+  747  pip install tensorflow-gpu --upgrade --force-reinstall 
+  748  python
+  749  conda show tensorflow
+  750  pip show tensorflow
+  751  lc
+  752  ;ls
+  753  cd ..
+  754  cd .
+  755  ls
+  756  cd .
+  757  cd ..
+  758  ls
+  759  cd KOSPI_Data_Collector/
+  760  jupyter notebook
+  761  pip install attr
+  762  jupyter notebook
+  763  python
+  764  ls
+  765  cd ..
+  766  ls
+  767  cd ..
+  768  ls
+  769  cd Workspace/
+  770  ls
+  771  cd va
+  772  cd vgae_pytorch/
+  773  ls
+  774  python train.py 
+  775  pip install scipy
+  776  python train.py 
+  777  pip install 
+  778  pip install scipy
+  779  ls
+  780  python train.py 
+  781  conda install scipy
+  782  python train.py 
+  783  conda install tensorflow-gpu
+  784  cd ..
+  785  ls
+  786  cd KOSPI_Data_Collector/
+  787  ls
+  788  jupyter notebook
+  789  pip uninstall attr
+  790  pip install attrs
+  791  jupyter notebook
+  792  exit
+  793  nvidia-smi -l 1
+  794  nvidia-smio
+  795  nvidia-smi
+  796  nvidia-smi -l 1
+  797  nvidia-smi
+  798  ls
+  799  cd ./Workspace/
+  800  ls
+  801  cd KOSPI_Data_Collector/
+  802  ls
+  803  conda create --name 'py36_tmp'
+  804  conda create --name 'py36_tmp' python=3.6
+  805  source activate py36_tmp
+  806  clear
+  807  ls
+  808  pip install jupyter
+  809  pip install tensorflow-gpu
+  810  jupyter notebook
+  811  pip uninstall tensorflow
+  812  pip install tensorflow-gpu==1.14
+  813  jupyter notebook
+  814  ls
+  815  conda env remove -n py36
+  816  conda create -n py36 python=3.6
+  817  source activate py36
+  818  nvcc -V
+  819  conda install pytorch torchvision cudatoolkit=10.2 -c pytorch
+  820  python
+  821  ls
+  822  cd ./Workspace/
+  823  ls
+  824  cd vgae_pytorch/
+  825  ls
+  826  python train.py 
+  827  pip install sklean
+  828  pip install sklearn
+  829  python train.py 
+  830  pip install networkx
+  831  python train.py 
+  832  ls
+  833  cd ..
+  834  ls
+  835  cd pyt
+  836  cd pytorch-CycleGAN-and-pix2pix/
+  837  ls
+  838  python train.py 
+  839  pip install dominate
+  840  python train.py 
+  841  cd ../Deep-Reinforcement-Learning-Algorithms-with-PyTorch/
+  842  ls
+  843  clear
+  844  ls
+  845  pip install -r ./requirements.txt 
+  846  ls
+  847  vim tests/
+  848  cd tr
+  849  cd tests/
+  850  ls
+  851  clear
+  852  ls
+  853  cd ..
+  854  ls
+  855  cd agents/
+  856  ls
+  857  cd ..
+  858  ls
+  859  cd environments/
+  860  ls
+  861  cd ..
+  862  ls
+  863  cd utilities/
+  864  ls
+  865  cd ..
+  866  ls
+  867  cd ..
+  868  ls
+  869  cd gae-pytorch/
+  870  ls
+  871  python gae/
+  872  ls
+  873  cd gae/
+  874  ;s
+  875  ls
+  876  python train.py 
+  877  vim train.py 
+  878  python train.py 
+  879  ls
+  880  cd ..
+  881  ls
+  882  nvcc -V
+  883  python
+  884  ls
+  885  cd ..
+  886  ls
+  887  git clone https://github.com/transedward/pytorch-dqn.git
+  888  cd pytorch-dqn/
+  889  ls
+  890  python main.py 
+  891  pip install gym
+  892  python main.py 
+  893  vim main.py 
+  894  python main.py 
+  895  vim main.py 
+  896  python main.py 
+  897  vim main.py 
+  898  pip uninstall gym
+  899  pip install gym==0.9.5
+  900  python main.py 
+  901  ls
+  902  pip install atari_py
+  903  python main.py 
+  904  ks
+  905  ls
+  906  source activate py36_tmp
+  907  pip install matplotlib
+  908  historyu
+  909  history
+  910  cd ./Workspace/
+  911  ls
+  912  git clone https://github.com/Hydragon516/darkflow.git
+  913  cd darkflow/
+  914  pip install -r requirements.txt
+  915  python setup.py build_ext --inplace
+  916  ls
+  917  cd ./Workspace/
+  918  ls
+  919  source activate py36
+  920  ls
+  921  cd ./KOSPI_Data_Collector/
+  922  ls
+  923  jupyter
+  924  ls
+  925  jupyter notebook
+  926  ls
+  927  cd ./Workspace/
+  928  ls
+  929  cd GCN/
+  930  ls
+  931  cd pygcn/
+  932  ls
+  933  cd pygcn
+  934  ls
+  935  python train.py 
+  936  source activate py36
+  937  exit
+  938  conda create --name gcn --clone py36
+  939  source activate py36
+  940  kls
+  941  ls
+  942  cd ./Workspace/
+  943  ls
+  944  cd GCN/pygcn/
+  945  cd pygcn
+  946  ls
+  947  clear
+  948  ls
+  949  python train.py 
+  950  ls
+  951  cd ..
+  952  ls
+  953  cd pygcn
+  954  l;s
+  955  vim train.py 
+  956  ls
+  957  cd ..
+  958  ls
+  959  python ./pygcn/train.py 
+  960  cp ./pygcn/train.py ./
+  961  python train.py 
+  962  vim train.py 
+  963  vim pygcn/utils.py 
+  964  vim ./pygcn/utils.py 
+  965  python train.py 
+  966  ls
+  967  cd data/
+  968  ls
+  969  mkdir armiq
+  970  cd ..
+  971  ls
+  972  cd ..
+  973  ls
+  974  cp -r armiq/Armiq/* ./GCN/pygcn/data/armiq/
+  975  cd ./GCN/pygcn/data/armiq/
+  976  ls
+  977  vim Data/
+  978  cd Data/
+  979  ls
+  980  vim TXT/
+  981  cd TXT/
+  982  ls
+  983  cd AC800026/
+  984  ls
+  985  vim AC800026
+  986  cd AC800026
+  987  ls
+  988  vim 2018-08-01_09-01-22.txt 
+  989  ls
+  990  cd ..
+  991  ls
+  992  python train.py 
+  993  exit
+  994  source activate alpha
+  995  source activate armiq
+  996  conda info --envs
+  997  conda create --name armiq --clone gcn
+  998  source activate armiq
+  999  ls
+ 1000  cd .?W
+ 1001  cd ./Workspace/
+ 1002  ls
+ 1003  clear
+ 1004  ls
+ 1005  cd GCN/pygcn/
+ 1006  ls
+ 1007  clear
+ 1008  ls
+ 1009  python train.py 
+ 1010  ls
+ 1011  vim ./pygcn/utils.py 
+ 1012  python train.py 
+ 1013  ls
+ 1014  sudo shutdown no
+ 1015  sudo shutdown now
+ 1016  nvidia-smi
+ 1017  source activate py36
+ 1018  pip install torchtet
+ 1019  pip install torchtext
+ 1020  conda install -c pytorch torchtext
+ 1021  ls
+ 1022  cd PycharmProjects/
+ 1023  ls
+ 1024  clear
+ 1025  ls
+ 1026  cd Py
+ 1027  cd pythonProject/
+ 1028  ls
+ 1029  clear
+ 1030  ls
+ 1031  python main.py 
+ 1032  ls
+ 1033  python train.py 
+ 1034  pip install spacy
+ 1035  python train.py 
+ 1036  python -m spacy download de
+ 1037  python -m spacy download en
+ 1038  python train.py 
+ 1039  vim train.py 
+ 1040  python train.py 
+ 1041  exit()
+ 1042  cledar
+ 1043  ls
+ 1044  exit
+ 1045  source activate py36
+ 1046  python torch
+ 1047  python
+ 1048  cd ~/Downloads/
+ 1049  ls
+ 1050  jupyter notebook
+ 1051  pip install jupyter
+ 1052  jupyter notebook
+ 1053  exit
+ 1054  source activate py36
+ 1055  l;s
+ 1056  pip install py36
+ 1057  pip install tensorboardX
+ 1058  ls
+ 1059  nvidia-smi
+ 1060  exit
+ 1061  ls
+ 1062  cd ./PycharmProjects/
+ 1063  ls
+ 1064  cd pythonProject/
+ 1065  ls
+ 1066  clear
+ 1067  ls
+ 1068  source activate py36
+ 1069  python train_simple.py 
+ 1070  sudo pkill python
+ 1071  nvidia-smi
+ 1072  python train_simple.py 
+ 1073  ls
+ 1074  vim utils/gen_armiq_dataset.py 
+ 1075  ls
+ 1076  cd ./dataset/armiq_txt/
+ 1077  ls
+ 1078  cd ..
+ 1079  ls
+ 1080  cd ..
+ 1081  ls
+ 1082  cd ..
+ 1083  ls
+ 1084  cd ETD/
+ 1085  ls
+ 1086  cd ..
+ 1087  ls
+ 1088  cd ./Workspace/armiq/Armiq/Data/
+ 1089  ls
+ 1090  cd TXT/
+ 1091  ls
+ 1092  clear
+ 1093  ls
+ 1094  cd AP35005263/
+ 1095  ls
+ 1096  cd AP35005263/
+ 1097  ls
+ 1098  cd ..
+ 1099  l
+ 1100  cd AP495102/AP495102/
+ 1101  ls
+ 1102  cd .
+ 1103  .cd .
+ 1104  cd ~/PycharmProjects/pythonProject/
+ 1105  ls
+ 1106  vim train_simple.py 
+ 1107  python train_simple.py 
+ 1108  vim train_simple.py 
+ 1109  python train_simple.py 
+ 1110  vim train_simple.py 
+ 1111  python train_simple.py 
+ 1112  vim 
+ 1113  clear
+ 1114  ls
+ 1115  tensorboard --logdir./logs
+ 1116  tensorboard --logdir==./logs
+ 1117  tensorboard --bind_all --logdir==./logs
+ 1118  sudo pkill tensorboard
+ 1119  tensorboard --bind_all --logdir==./logs
+ 1120  ls
+ 1121  cd logs/
+ 1122  ls
+ 1123  tensorboard --logdir==./*
+ 1124  tensorboard --bind_all --logdir==./*
+ 1125  cd ..
+ 1126  ls
+ 1127  exit()
+ 1128  ifconfig
+ 1129  source activate armiq
+ 1130  conda list -e > requirment.txt
+ 1131  ls
+ 1132  vim requirment.txt 
+ 1133  cd ..
+ 1134  ls
+ 1135  cd einstein/
+ 1136  ls
+ 1137  cd ./PycharmProjects/
+ 1138  ls
+ 1139  cd pythonProject/
+ 1140  ls
+ 1141  cd ..
+ 1142  ls
+ 1143  tar zvfz ./pythonProject ./arimq_etd.tar.gz
+ 1144  tar -zcvf ./armiq.tar.gz ./pythonProject
+ 1145  ls
+ 1146  git clone https://github.com/andreYoo/etd_temp.git
+ 1147  ls
+ 1148  cp -r ./armiq/* ./etd_temp/
+ 1149  cd ./etd_temp/
+ 1150  ls
+ 1151  git add ./*
+ 1152  git commit -m 'first version'
+ 1153  git push all
+ 1154  git push
+ 1155  2
+ 1156  ls
+ 1157  cp /home/einstein/requirment.txt ./
+ 1158  git add ./requirment.txt 
+ 1159  git commit -m 'requirment file'
+ 1160  git push
+ 1161  sudo apt update
+ 1162  sudo apt-get install mcomix
+ 1163  htop
+ 1164  sudo apt update
+ 1165  sudo apt upgrade
+ 1166  sudo reboor
+ 1167  sudo reboot
+ 1168  cd ./w
+ 1169  cd ./Workspace/
+ 1170  ls
+ 1171  git clone https://github.com/podgorskiy/GPND.git
+ 1172  ls
+ 1173  cd G
+ 1174  cd GPND/
+ 1175  ls
+ 1176  vim novelty_detector.py 
+ 1177  ls
+ 1178  vim requirements.txt 
+ 1179  vim README.md 
+ 1180  source train_AAE.py 
+ 1181  source activate py36
+ 1182  python train_AAE.py 
+ 1183  pip install yacs
+ 1184  python train_AAE.py 
+ 1185  pip install dlutils
+ 1186  python train_AAE.py 
+ 1187  pip install matplotlib
+ 1188  python train_AAE.py 
+ 1189  vim train_AAE.py 
+ 1190  vim README.md 
+ 1191  python partition_mnist.py 
+ 1192  pip uninstall scipy
+ 1193  pip install scipy==1.2.2
+ 1194  python partition_mnist.py 
+ 1195  vim README.md 
+ 1196  python schedule.py 
+ 1197  nvidia-smi
+ 1198  pip install pandas
+ 1199  cd ./Workspace/
+ 1200  ls
+ 1201  source activate alpha
+ 1202  source activate py36
+ 1203  git clone https://github.com/keon/seq2seq.git
+ 1204  cd s
+ 1205  cd seq2seq/
+ 1206  ls
+ 1207  python train.py 
+ 1208  ls
+ 1209  cd ..
+ 1210  ls
+ 1211  cd ..
+ 1212  ls
+ 1213  cd PycharmProjects/
+ 1214  ls
+ 1215  cd pythonProject/
+ 1216  ls
+ 1217  python train.py 
+ 1218  ls
+ 1219  cd ..
+ 1220  l;s
+ 1221  ls
+ 1222  cd pythonProject/
+ 1223  ls
+ 1224  cd ..
+ 1225  ls
+ 1226  cd ..
+ 1227  cd Workspace/
+ 1228  ls
+ 1229  vim seq2seq/
+ 1230  cd seq2seq/
+ 1231  ls
+ 1232  vim __pycache__/
+ 1233  mkdir models
+ 1234  cp model.py ./model/
+ 1235  ls
+ 1236  mv model.py ./models/
+ 1237  mkdir utils
+ 1238  mv utils.py ./utils/
+ 1239  ls
+ 1240  vim train.py 
+ 1241  python train.py 
+ 1242  ls
+ 1243  vim models/model.py 
+ 1244  vim train.py 
+ 1245  vim models/model.py 
+ 1246  vim train.py 
+ 1247  python train.py 
+ 1248  vim train.py 
+ 1249  ls
+ 1250  cd ..
+ 1251  ls
+ 1252  cd ..
+ 1253  ls
+ 1254  cd ./Workspace/
+ 1255  ls
+ 1256  cd ..
+ 1257  ls
+ 1258  cd PycharmProjects/
+ 1259  ls
+ 1260  cd pythonProject/
+ 1261  ls
+ 1262  clear
+ 1263  ls
+ 1264  vim train.py 
+ 1265  python train.py 
+ 1266  vim train.py 
+ 1267  python train.py 
+ 1268  vim train.py 
+ 1269  python train.py 
+ 1270  ls
+ 1271  cd ..
+ 1272  ls
+ 1273  cd ETD/
+ 1274  ls
+ 1275  wls
+ 1276  cd ../pythonProject/
+ 1277  ls
+ 1278  cd .data/
+ 1279  ls
+ 1280  cd ..
+ 1281  ls
+ 1282  rm -rf .data
+ 1283  ls
+ 1284  mkdir dataset
+ 1285  cp ~/Workspace/armiq/Armiq/Data ./
+ 1286  ls
+ 1287  cp -r ~/Workspace/armiq/Armiq/Data ./dataset/
+ 1288  ls
+ 1289  cd dataset/
+ 1290  ls
+ 1291  cd armiq_txt/
+ 1292  pwd
+ 1293  ls
+ 1294  cd ./..
+ 1295  cd ..
+ 1296  ls
+ 1297  cd ..
+ 1298  ls
+ 1299  cd pythonProject/
+ 1300  ls
+ 1301  pip install tensorboard
+ 1302  tensorboard --logdir=./logs
+ 1303  pip install tensorflow-gpu
+ 1304  tensorboard --logdir=./logs
+ 1305  ls
+ 1306  vim ./logs/
+ 1307  rm ./logs/*
+ 1308  ls
+ 1309  vim models/
+ 1310  LS
+ 1311  sudo apt install tmux
+ 1312  ls
+ 1313  tmumx
+ 1314  tmux
+ 1315  tmux new -s armiq
+ 1316  tmux ls
+ 1317  tmux attach -t armiq
+ 1318  tmux new -s tb
+ 1319  tmux ls
+ 1320  nvidia-smi
+ 1321  ls
+ 1322  vim dataset_analysis.py
+ 1323  ls
+ 1324  l;s
+ 1325  clear
+ 1326  ls
+ 1327  clear
+ 1328  lcd
+ 1329  cd ./Workspace/
+ 1330  ls
+ 1331  l,ks
+ 1332  ls
+ 1333  clear
+ 1334  ls
+ 1335  source activate py36
+ 1336  pip install pathlib
+ 1337  nvidia-smi -l 1
+ 1338  ls
+ 1339  source activate py36
+ 1340  ls
+ 1341  tensorboard --logdir=./logs
+ 1342  cd ./PY
+ 1343  cd P
+ 1344  cd PycharmProjects/
+ 1345  ls
+ 1346  cd pythonProject/
+ 1347  ls
+ 1348  source activate py36
+ 1349  tensorboard --logdr=./logs
+ 1350  tensorboard --logdir=./logs
+ 1351  ls
+ 1352  ssh root@13.124.117.25
+ 1353  exit
+ 1354  ls
+ 1355  cd PycharmProjects/
+ 1356  ls
+ 1357  cd pythonProject/
+ 1358  ls
+ 1359  source activate py36
+ 1360  ls
+ 1361  tensorboard --logdir=./logs
+ 1362  ls
+ 1363  tensorboard --logdir=./logs
+ 1364* ssh 52.79.81.1372
+ 1365  ssh root@52.79.81.137
+ 1366  ls
+ 1367  cd ..
+ 1368  cd /
+ 1369  ls
+ 1370  cd ~/
+ 1371  ls
+ 1372  vim requirements.txt 
+ 1373  history
+ 1374  ssh root@52.79.81.137
+ 1375  ls
+ 1376  cd PycharmProjects/pythonProject/
+ 1377  ls
+ 1378  zip ./dataset ./dataset.zip
+ 1379  zip ./dataset.zip ./dataset
+ 1380  ls
+ 1381  history
+ 1382  q!
+ 1383  history > log.txt
